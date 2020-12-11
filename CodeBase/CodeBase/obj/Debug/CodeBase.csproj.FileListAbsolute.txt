@@ -83,4 +83,3 @@ E:\DotNetCodeBase\CodeBase\CodeBase\obj\Debug\CodeBase.csproj.CoreCompileInputs.
 E:\DotNetCodeBase\CodeBase\CodeBase\obj\Debug\CodeBase.csproj.CopyComplete
 E:\DotNetCodeBase\CodeBase\CodeBase\obj\Debug\CodeBase.dll
 E:\DotNetCodeBase\CodeBase\CodeBase\obj\Debug\CodeBase.pdb
-E:\DotNetCodeBase\CodeBase\CodeBase\obj\Debug\CodeBase.csprojAssemblyReference.cache

@@ -18,6 +18,8 @@ namespace CodeBase.Controllers
         [HttpPost]
         public ActionResult UploadFile()
         {
+            string name = Request.Form["name"];
+            string age = Request.Form["age"];
             //文件大小限制10M
             const int maxSize = 10485760;
             //定义允许上传的文件扩展名
@@ -62,7 +64,7 @@ namespace CodeBase.Controllers
                             resp = new { 
                                 status = true, 
                                 message = "上传成功! 文件大小为:" + files[0].ContentLength, 
-                                ImgUrl = savePath + fileNewName, 
+                                ImgUrl = HttpContext.Server.MapPath(savePath) + fileNewName, 
                                 FName = fileNewName, 
                                 OName = files[0].FileName
                             };

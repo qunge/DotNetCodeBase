@@ -3,32 +3,44 @@
 }
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/ajaxfileupload.js"></script>
 
 @*<form action="/Home/UploadFile" method="post" enctype="multipart/form-data">*@
-<input type="file" name="file"  id="fileToUpload" onchange="uploadFile()" style="float:left" />
-<input type="button" value="保存" />
+<input type="file" name="file"  id="fileToUpload" style="float:left" />
+<input id="name" type="text" placeholder="姓名" />
+<input id="age" type="number" placeholder="年龄" />
+<input type="button" onclick="uploadFile()" value="保存" />
 @*</form>*@
 
 <script type="text/javascript">
-    function uploadFile () {
-        $.ajaxFileUpload({
-                url: '/Home/UploadFile',
-                secureuri: false,
-                fileElementId: 'fileToUpload',//file标签的id
-                dataType: 'json',//返回数据的类型
-                data: { name: 'logan' },//一同上传的数据
-                success: function (data, status) {
-                    if (status == "success" && data.status) {
-                        alert(data.message + "\n文件上传路径：" + data.ImgUrl + ",\n新文件名：" + data.FName);
-                    }
-                    else {
-                        alert("上传失败" );
-                    }
-                },
-                error: function (data, status, e) {
-                    alert(e);
+    function uploadFile() {
+        var file = $('#fileToUpload')[0].files[0];
+        var name = $("#name").val();
+        var age = $("#age").val();
+        var formData = new FormData();
+        formData.append("name", name);
+        formData.append("age", age);
+        formData.append("file", file);
+
+        $.ajax({
+            url: '/Home/UploadFile',
+            dataType: 'json',
+            type: 'POST',
+            async: false,
+            data: formData,
+            processData: false, // 使数据不做处理
+            contentType: false, // 不要设置Content-Type请求头
+            success: function (data) {
+                if (data.status) {
+                    alert(data.message + "\n上传前文件名称：" + data.OName + "\n上传后文件名称：" + data.FName + "\n文件上传路径：" + data.ImgUrl);
                 }
-            });
+                else {
+                    alert(data.message);
+                }
+
+            },
+            error: function (response) {
+                console.log(response);
+            }
+        });
     }
 </script>  
